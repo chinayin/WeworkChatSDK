@@ -24,6 +24,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
+          generate_release_notes: "true"
           files: |
             target/*.jar
             target/*.tar.gz
