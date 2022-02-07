@@ -1,7 +1,10 @@
 ### WeworkChatSDK
 
-企业微信会话存档服务(WeworkChatSDK)，提供一键接入java sdk，投递数据到阿里云MNS、OSS。
+[![Author](https://img.shields.io/badge/author-@chinayin-blue.svg)](https://github.com/chinayin)
+[![Build Status](https://github.com/chinayin/WeworkChatSDK/workflows/JavaCI/badge.svg)](https://github.com/chinayin/WeworkChatSDK/actions)
+![license](https://img.shields.io/github/license/chinayin/WeworkChatSDK.svg)
 
+企业微信会话存档服务(WeworkChatSDK)，提供一键接入java sdk，投递数据到阿里云MNS、OSS。
 
 ### 功能介绍：
 
