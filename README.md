@@ -75,12 +75,12 @@ public class Demo {
 ```
 
 - 生成打包文件
-```shell
+```bash
 ./mvnw clean package
 ```
 
 - 命令行方式运行
-```shell
+```bash
 java -jar WeworkChatSDK-[version].jar
 # 生产环境 (目录存在 application-prod.properties )
 java -jar WeworkChatSDK-[version].jar --spring.profiles.active=prod
@@ -96,18 +96,18 @@ java -jar WeworkChatSDK-[version].jar --spring.profiles.active=prod
 https://arthas.aliyun.com/
 
 下载arthas-boot.jar，然后用java -jar的方式启动：
-```shell
+```bash
 curl -O https://arthas.aliyun.com/arthas-boot.jar
 java -jar arthas-boot.jar
 ```
 
 打印帮助信息：
-```shell
+```bash
 java -jar arthas-boot.jar -h
 ```
 
 选择应用java进程：
-```shell
+```bash
 $ $ java -jar arthas-boot.jar
 * [1]: 12345
 ```
