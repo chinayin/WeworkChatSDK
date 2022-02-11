@@ -73,6 +73,8 @@ public class OssClientServiceImpl implements OssClientService {
                                 "Host ID: {}",
                         ex.getErrorMessage(), ex.getErrorCode(), ex.getRequestId(), ex.getHostId());
             }
+            // 存在同名文件避免后续产生垃圾文件,删除文件
+            fs.delete();
         } catch (ClientException ex) {
             log.error("[异常]Caught an ClientException, which means the client encountered "
                     + "a serious internal problem while trying to communicate with OSS, "
