@@ -1,7 +1,6 @@
 package com.chinayin.wework.chatdata.model;
 
 import com.alibaba.fastjson2.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.List;
@@ -28,7 +27,6 @@ public class ChatDataDTO {
     /**
      * 聊天记录数据内容。数组类型。包括seq、msgid等内容
      */
-    @JsonIgnore
     @JSONField(name = "chatdata")
     protected List<ChatDataDetailDTO> chatData;
 

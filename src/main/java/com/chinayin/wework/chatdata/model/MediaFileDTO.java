@@ -8,7 +8,6 @@ import com.chinayin.wework.chatdata.model.messagetype.TypeImage;
 import com.chinayin.wework.chatdata.model.messagetype.TypeVideo;
 import com.chinayin.wework.chatdata.model.messagetype.item.TypeChatRecordItem;
 import com.chinayin.wework.chatdata.model.messagetype.item.TypeMixedItem;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +20,6 @@ import java.util.Objects;
  */
 @Data
 @Slf4j
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MediaFileDTO {
 
     /**

@@ -1,7 +1,6 @@
 package com.chinayin.wework.chatdata.model.messagetype.item;
 
 import com.alibaba.fastjson2.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
@@ -10,7 +9,6 @@ import lombok.Data;
  */
 
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TypeMixedItem {
 
     /**

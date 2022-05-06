@@ -2,7 +2,6 @@ package com.chinayin.wework.chatdata.model;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.chinayin.wework.chatdata.model.messagetype.*;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
  * 企业微信接口获取的实际解密后消息
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MessageDTO {
 
     /**
