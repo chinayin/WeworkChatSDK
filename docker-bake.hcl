@@ -3,7 +3,7 @@ variable "version" {
 }
 
 variable "repo" {
-  default = "chinayin/WeworkChatSDK"
+  default = "chinayin/weworkchat-sdk"
 }
 
 variable "registry" {
