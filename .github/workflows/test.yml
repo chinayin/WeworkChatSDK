@@ -3,11 +3,12 @@ name: JavaCI
 on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         java: [8, 17]
+    name: Test JDK ${{ matrix.java }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup java
@@ -15,5 +16,6 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
+          cache: 'maven'
       - name: Build with Maven
         run: mvn clean package -B --file pom.xml
