@@ -1,7 +1,7 @@
 package com.chinayin.wework.chatdata.model;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.chinayin.wework.chatdata.model.messagetype.TypeEmotion;
 import com.chinayin.wework.chatdata.model.messagetype.TypeFile;
 import com.chinayin.wework.chatdata.model.messagetype.TypeImage;
@@ -20,15 +20,15 @@ import java.util.Objects;
  * @author chianyin <whereismoney@qq.com>
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Slf4j
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MediaFileDTO {
 
     /**
      * 固定值,队列服务时使用
      */
-    @JSONField(ordinal = 1, name = "job", defaultValue = "ChatMessageMedia")
-    private String job;
+    @JSONField(ordinal = 1, name = "job")
+    private String job = "ChatMessageMedia";
 
     @JSONField(ordinal = 2, name = "msgtype")
     private String msgType;

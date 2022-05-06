@@ -1,6 +1,6 @@
 package com.chinayin.wework.chatdata.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.chinayin.wework.chatdata.model.messagetype.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

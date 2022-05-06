@@ -6,7 +6,7 @@
     <artifactId>WeworkChatSDK</artifactId>
     <name>WeworkChatSDK</name>
     <description>企业微信会话存档服务(WeworkChatSDK)，提供一键接入java sdk，导出数据到阿里云msn、oss</description>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 
     <licenses>
         <license>
@@ -47,9 +47,9 @@
             <version>2.13.2</version>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.80</version>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun.mns</groupId>

@@ -1,6 +1,6 @@
 package com.chinayin.wework.chatdata.service.impl;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.chinayin.wework.chatdata.config.WeWorkConfig;
 import com.chinayin.wework.chatdata.model.ChatDataDTO;
 import com.chinayin.wework.chatdata.model.ChatDataDetailDTO;
