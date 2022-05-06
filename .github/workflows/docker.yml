@@ -15,7 +15,7 @@ jobs:
         id: vars
         run: |
           echo ::set-output name=repository::${GITHUB_ACTOR}/$(basename ${GITHUB_REPOSITORY})
-          echo ::set-output name=version::${{ github.ref }}
+          echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -27,6 +27,8 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: Build and push
         uses: docker/bake-action@master
+        env:
+          version: ${{ steps.vars.outputs.tag }}
         with:
           pull: true
           push: true
