@@ -20,7 +20,7 @@ public class ChatDataSchedule {
     /**
      * seq 文件保存位置
      */
-    private static final String seqFileName = "/tmp/seq.txt";
+    private static final String seqFileName = "/tmp/wework/seq.txt";
 
     @Resource
     private ChatDataService chatDataService;
