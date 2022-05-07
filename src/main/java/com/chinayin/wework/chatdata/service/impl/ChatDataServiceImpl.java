@@ -1,6 +1,6 @@
 package com.chinayin.wework.chatdata.service.impl;
 
-import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson.JSON;
 import com.chinayin.wework.chatdata.config.WeWorkConfig;
 import com.chinayin.wework.chatdata.model.ChatDataDTO;
 import com.chinayin.wework.chatdata.model.ChatDataDetailDTO;
@@ -177,7 +177,7 @@ public class ChatDataServiceImpl implements ChatDataService {
                 }
             }
         } catch (Exception ex) {
-            log.error("[异常]媒体文件解析或处理失败, {}", ex.getMessage());
+            log.error("[异常]媒体文件解析或处理失败, {}, {}",chatDataDetailDTO.getMsgId(), ex.getMessage());
         }
 
     }

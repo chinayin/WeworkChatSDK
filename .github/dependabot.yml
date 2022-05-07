@@ -10,3 +10,6 @@ updates:
     target-branch: "master"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: com.alibaba:fastjson
+        versions: ["2.x"]
