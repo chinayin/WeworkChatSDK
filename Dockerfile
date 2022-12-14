@@ -10,7 +10,7 @@ FROM --platform=linux/amd64 chinayin/maven:3-jdk-8-bullseye-slim AS builder
 RUN set -eux \
   #&& install_packages tree vim \
   && mkdir -p ~/.m2 \
-  && echo '<settings><mirrors><mirror><id>aliyun</id><mirrorOf>*</mirrorOf><name>aliyun</name><url>https://maven.aliyun.com/repository/public</url></mirror></mirrors></settings>' >> ~/.m2/settings.xml \
+  #&& echo '<settings><mirrors><mirror><id>aliyun</id><mirrorOf>*</mirrorOf><name>aliyun</name><url>https://maven.aliyun.com/repository/public</url></mirror></mirrors></settings>' >> ~/.m2/settings.xml \
   && mkdir /app
 
 WORKDIR /app
