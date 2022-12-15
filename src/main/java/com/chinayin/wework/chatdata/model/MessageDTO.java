@@ -86,7 +86,7 @@ public class MessageDTO {
     private TypeAgree agree;
 
     @JSONField(ordinal = 10, name = "disagree")
-    private TypeAgree disagree;
+    private TypeDisagree disagree;
 
     /**
      * 语音
@@ -162,9 +162,11 @@ public class MessageDTO {
 
     /**
      * 红包
+     * and
+     * 互通红包
      */
-    @JSONField(ordinal = 10, name = "redpacket")
-    private TypeRedPacket redPacket;
+    @JSONField(ordinal = 10, name = "redpacket", alternateNames = {"redpacket"})
+    private TypeRedPacket redpacket;
 
     /**
      * 会议邀请
@@ -216,12 +218,6 @@ public class MessageDTO {
      * 音频共享文档
      * todo
      */
-
-    /**
-     * 互通红包
-     */
-    @JSONField(ordinal = 10, name = "redpacket")
-    private TypeRedPacket externalRedPacket;
 
     /**
      * 视频号
