@@ -209,6 +209,13 @@ public class MessageDTO {
     @JSONField(ordinal = 10, name = "mixed")
     private TypeMixed mixed;
 
+
+    /**
+     * 音视频通话
+     */
+    @JSONField(ordinal = 10, name = "info")
+    private TypeVoiptext voiptext;
+
     /**
      * 音频存档
      * todo
