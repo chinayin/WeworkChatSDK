@@ -14,7 +14,7 @@ jobs:
       - name: Set variables
         id: vars
         run: |
-          echo ::set-output name=repository::${GITHUB_ACTOR}/weworkchat-sdk
+          echo "repository=${GITHUB_ACTOR}/weworkchat-sdk" >> $GITHUB_OUTPUT
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:

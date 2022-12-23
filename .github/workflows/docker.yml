@@ -14,8 +14,8 @@ jobs:
       - name: Set variables
         id: vars
         run: |
-          echo ::set-output name=repository::${GITHUB_ACTOR}/$(basename ${GITHUB_REPOSITORY})
-          echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+          echo "repository=${GITHUB_ACTOR}/$(basename ${GITHUB_REPOSITORY})" >> $GITHUB_OUTPUT
+          echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
