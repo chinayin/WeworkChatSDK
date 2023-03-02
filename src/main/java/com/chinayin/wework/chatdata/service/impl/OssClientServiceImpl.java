@@ -46,7 +46,7 @@ public class OssClientServiceImpl implements OssClientService {
         File fs = new File(file);
         log.info("{} .size = {}", objectName, fs.length());
         if (!fs.exists() || fs.length() < 1) {
-            log.error("上传 oss 失败, {} ", objectName);
+            log.error("本地 oss 文件不存在, {} ", objectName);
             return;
         }
         OSS ossClient = new OSSClientBuilder().build(
@@ -54,7 +54,9 @@ public class OssClientServiceImpl implements OssClientService {
         try {
             // 优先判断文件是否存在
             boolean found = ossClient.doesObjectExist(config.getBucket(), objectName);
-            if (!found) {
+            if (found) {
+                log.info("[流程]上传 oss 同名跳过, {}", objectName);
+            } else {
                 // 禁止覆盖同名文件 https://help.aliyun.com/document_detail/146172.html
                 ObjectMetadata metadata = new ObjectMetadata();
                 metadata.setHeader("x-oss-forbid-overwrite", "true");

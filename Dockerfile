@@ -5,7 +5,7 @@
 #--------------------------------------------------------------------------
 #
 
-FROM --platform=linux/amd64 chinayin/maven:3-jdk-8-bullseye-slim AS builder
+FROM --platform=linux/amd64 chinayin/maven:3-jdk-8 AS builder
 
 RUN set -eux \
   #&& install_packages tree vim \
@@ -23,7 +23,7 @@ RUN set -eux \
   && echo $SDK_VERSION \
   && cp -f target/WeworkChatSDK-${SDK_VERSION}-bundle.tar.gz target/bundle.tar.gz
 
-FROM --platform=linux/amd64 chinayin/openjdk:8-jdk-bullseye-slim
+FROM --platform=linux/amd64 chinayin/openjdk:8-jre
 ENV TZ=PRC
 ENV PARAMS=""
 
@@ -31,7 +31,6 @@ COPY --from=builder /app/target/bundle.tar.gz /app/bundle.tar.gz
 WORKDIR /app
 
 RUN set -eux \
-  && install_packages curl \
   && tar -xzf bundle.tar.gz -C /app --strip-components=1 \
   && mkdir -p /usr/lib64 \
   && mv *.so /usr/lib64 \
