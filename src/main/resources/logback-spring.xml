@@ -25,7 +25,7 @@
 
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.apache" level="INFO"/>
-    <logger name="com.aliyun.mns" level="INFO"/>
+    <logger name="com.aliyun" level="INFO"/>
 
     <!--配置多环境日志输出
         application.properties中配置选择哪个profiles : spring.profiles.active=dev

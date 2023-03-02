@@ -52,13 +52,17 @@ public class OssClientServiceImpl implements OssClientService {
         OSS ossClient = new OSSClientBuilder().build(
                 config.getEndpoint(), config.getAccessKeyId(), config.getAccessKeySecret());
         try {
-            // 禁止覆盖同名文件 https://help.aliyun.com/document_detail/146172.html
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setHeader("x-oss-forbid-overwrite", "true");
-            // 上传
-            PutObjectRequest putObjectRequest = new PutObjectRequest(config.getBucket(), objectName, fs, metadata);
-            PutObjectResult putObjectResult = ossClient.putObject(putObjectRequest);
-            //log.info("[流程]上传 oss 成功, {}", putObjectResult.getResponse().getRequestId());
+            // 优先判断文件是否存在
+            boolean found = ossClient.doesObjectExist(config.getBucket(), objectName);
+            if (!found) {
+                // 禁止覆盖同名文件 https://help.aliyun.com/document_detail/146172.html
+                ObjectMetadata metadata = new ObjectMetadata();
+                metadata.setHeader("x-oss-forbid-overwrite", "true");
+                // 上传
+                PutObjectRequest putObjectRequest = new PutObjectRequest(config.getBucket(), objectName, fs, metadata);
+                PutObjectResult putObjectResult = ossClient.putObject(putObjectRequest);
+                //log.info("[流程]上传 oss 成功, {}", putObjectResult.getResponse().getRequestId());
+            }
             // 上传完删除文件
             fs.delete();
         } catch (OSSException ex) {
