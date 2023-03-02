@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,33 +43,21 @@ public class ChatDataServiceImpl implements ChatDataService {
     @Resource
     private FileOutputService fileService;
 
-    @Resource
-    private EncryptService encryptService;
-
-    @Resource
-    private MediaService mediaService;
-
     @Qualifier("threadPool")
     @Resource
     private ExecutorService executorService;
 
+    @Resource
+    private ClientService clientService;
+
     @Override
     public long getChatData(long seq) {
-        // 初始化sdk
-        long sdk = Finance.NewSdk();
-        int initStatus = Finance.Init(sdk, weworkConfig.getCorpId(), weworkConfig.getCorpSecret());
-        if (initStatus != 0) {
-            log.error("[异常]sdk初始化失败, {}", initStatus);
-            Finance.DestroySdk(sdk);
-            return seq;
-        }
         // 拉取消息
         long slice = Finance.NewSlice();
-        int ret = Finance.GetChatData(sdk, seq, weworkConfig.getLimit(), weworkConfig.getProxy(), weworkConfig.getPasswd(), weworkConfig.getTimeout(), slice);
+        int ret = Finance.GetChatData(clientService.getSdk(), seq, weworkConfig.getLimit(), weworkConfig.getProxy(), weworkConfig.getPasswd(), weworkConfig.getTimeout(), slice);
         if (ret != 0) {
             log.error("[异常]微信会话获取数据失败, {}", ret);
             Finance.FreeSlice(slice);
-            Finance.DestroySdk(sdk);
             return seq;
         }
         // 获取slice内容
@@ -75,47 +65,26 @@ public class ChatDataServiceImpl implements ChatDataService {
         if (chatDataDTO.getErrCode() != 0) {
             log.error("[异常]拉消息失败, {}", chatDataDTO);
             Finance.FreeSlice(slice);
-            Finance.DestroySdk(sdk);
             return seq;
         }
         if (Objects.isNull(chatDataDTO.getChatData()) || chatDataDTO.getChatData().size() == 0) {
             log.info("[流程]暂无消息 seqNum {}, {}", seq, chatDataDTO);
             Finance.FreeSlice(slice);
-            Finance.DestroySdk(sdk);
             return seq;
         }
         // 逐条处理
         for (ChatDataDetailDTO chatDataDetailDTO : chatDataDTO.getChatData()) {
-            this.handleMessage(sdk, chatDataDetailDTO);
+            this.handleMessage(chatDataDetailDTO);
             seq = chatDataDetailDTO.getSeq();
         }
         //
         Finance.FreeSlice(slice);
-        Finance.DestroySdk(sdk);
         return seq;
     }
 
 
-    private String decryptData(long sdk, Integer publicKeyVer, String encryptKey, String encryptChatMsg) {
-        // 解密key
-        String decodeKey = encryptService.decodeEncryptRandomKey(publicKeyVer, encryptKey);
-        if (Objects.isNull(decodeKey)) {
-            return null;
-        }
-        long slice = Finance.NewSlice();
-        int decryptStatus = Finance.DecryptData(sdk, decodeKey, encryptChatMsg, slice);
-        if (decryptStatus != 0) {
-            log.error("DecryptData, {}", decryptStatus);
-            Finance.FreeSlice(slice);
-            return null;
-        }
-        String msg = Finance.GetContentFromSlice(slice);
-        Finance.FreeSlice(slice);
-        return msg;
-    }
-
-    private void handleMessage(long sdk, ChatDataDetailDTO chatDataDetailDTO) {
-        String originMsg = this.decryptData(sdk, chatDataDetailDTO.getPublicKeyVer(), chatDataDetailDTO.getEncryptRandomKey(), chatDataDetailDTO.getEncryptChatMsg());
+    private void handleMessage(ChatDataDetailDTO chatDataDetailDTO) {
+        String originMsg = clientService.decryptData(chatDataDetailDTO.getPublicKeyVer(), chatDataDetailDTO.getEncryptRandomKey(), chatDataDetailDTO.getEncryptChatMsg());
         if (Objects.isNull(originMsg)) {
             return;
         }
@@ -177,7 +146,7 @@ public class ChatDataServiceImpl implements ChatDataService {
                 }
             }
         } catch (Exception ex) {
-            log.error("[异常]媒体文件解析或处理失败, {}, {}",chatDataDetailDTO.getMsgId(), ex.getMessage());
+            log.error("[异常]媒体文件解析或处理失败, {}, {}", chatDataDetailDTO.getMsgId(), ex.getMessage());
         }
 
     }
@@ -190,7 +159,7 @@ public class ChatDataServiceImpl implements ChatDataService {
         String objectName = "wework/" + day + "/" + md5 + "." + media.getFileExt();
         try {
             // 下载
-            mediaService.downloadMediaFile(sdkFileId, file, media.getFileSize());
+            clientService.downloadMediaFile(sdkFileId, file, media.getFileSize());
             // 上传
             ossService.upload(objectName, file);
             //
@@ -208,5 +177,6 @@ public class ChatDataServiceImpl implements ChatDataService {
             log.error("[异常]处理媒体文件, {}, {}", e.getMessage(), sdkFileId);
         }
     }
+
 
 }

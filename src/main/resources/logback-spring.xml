@@ -20,10 +20,6 @@
         </rollingPolicy>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
-            <!--pattern>
-                {"datetime": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZZZ}", "thread" : "%thread", "logger" : "%logger{60}",
-                "message": "%msg"} %n
-            </pattern-->
         </encoder>
     </appender>
 
