@@ -12,3 +12,6 @@ updates:
       interval: "weekly"
     ignore:
       - dependency-name: com.alibaba:fastjson
+        versions: [">=2.0"]
+      - dependency-name: org.springframework.boot.spring-boot-starter-parent
+        versions: [">=3.0"]
