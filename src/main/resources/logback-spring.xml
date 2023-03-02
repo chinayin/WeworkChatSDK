@@ -20,16 +20,12 @@
         </rollingPolicy>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
-            <!--pattern>
-                {"datetime": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZZZ}", "thread" : "%thread", "logger" : "%logger{60}",
-                "message": "%msg"} %n
-            </pattern-->
         </encoder>
     </appender>
 
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.apache" level="INFO"/>
-    <logger name="com.aliyun" level="INFO"/>
+    <logger name="com.aliyun.mns" level="INFO"/>
 
     <!--配置多环境日志输出
         application.properties中配置选择哪个profiles : spring.profiles.active=dev

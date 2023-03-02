@@ -3,15 +3,11 @@ package com.chinayin.wework.chatdata.service;
 /**
  * @author chianyin <whereismoney@qq.com>
  */
-public interface MediaService {
+public interface ClientService {
+    long getSdk();
 
-    /**
-     * 下载企业微信媒体文件
-     *
-     * @param sdkFileId
-     * @param file
-     * @param fileSize
-     */
     void downloadMediaFile(String sdkFileId, String file, long fileSize);
+
+    String decryptData(Integer publicKeyVer, String encryptKey, String encryptChatMsg);
 
 }
