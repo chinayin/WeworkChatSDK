@@ -13,5 +13,9 @@ updates:
     ignore:
       - dependency-name: com.alibaba:fastjson
         versions: [">=2.0"]
+      - dependency-name: spring-boot-starter-parent
+        versions: [">=3"]
       - dependency-name: org.springframework.boot.spring-boot-starter-parent
-        versions: [">=3.0"]
+        versions: [">=3"]
+      - dependency-name: io.sentry:sentry-spring-boot-starter
+        versions: [">=3"]
