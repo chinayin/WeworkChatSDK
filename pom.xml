@@ -6,7 +6,7 @@
     <artifactId>WeworkChatSDK</artifactId>
     <name>WeworkChatSDK</name>
     <description>企业微信会话存档服务(WeworkChatSDK)，提供一键接入java sdk，导出数据到阿里云msn、oss</description>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
 
     <licenses>
         <license>
