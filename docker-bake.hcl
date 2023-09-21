@@ -24,10 +24,10 @@ target "_all_platforms" {
 }
 
 group "default" {
-  targets = ["jdk8"]
+  targets = ["jre8"]
 }
 
-target "jdk8" {
+target "jre8" {
   inherits = ["_all_platforms"]
   context  = "."
   tags     = [
