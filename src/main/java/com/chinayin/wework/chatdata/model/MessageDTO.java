@@ -227,9 +227,15 @@ public class MessageDTO {
      */
 
     /**
-     * 视频号
+     * 视频号消息
      */
     @JSONField(ordinal = 10, name = "sphfeed")
     private TypeSphFeed sphFeed;
+
+    /**
+     * 微盘文件
+     */
+    @JSONField(ordinal = 10, name = "info")
+    private TypeQyDiskFile qydiskfile;
 
 }
