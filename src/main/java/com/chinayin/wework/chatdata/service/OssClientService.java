@@ -14,6 +14,14 @@ public interface OssClientService {
     String getMediaOssUrl(String objectName);
 
     /**
+     * 判断文件是否存在
+     *
+     * @param objectName
+     * @return
+     */
+    Boolean doesObjectExist(String objectName);
+
+    /**
      * 上传资源到 oss
      *
      * @param objectName

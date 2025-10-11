@@ -36,6 +36,34 @@ public class OssClientServiceImpl implements OssClientService {
         return "https://" + config.getBucket() + "." + config.getEndpoint() + "/" + objectName;
     }
 
+    public Boolean doesObjectExist(String objectName) {
+        OSS ossClient = new OSSClientBuilder().build(
+                config.getEndpoint(), config.getAccessKeyId(), config.getAccessKeySecret());
+        try {
+            return ossClient.doesObjectExist(config.getBucket(), objectName);
+        } catch (OSSException ex) {
+            if (ex.getErrorCode().equals("FileAlreadyExists")) {
+                return true;
+            } else {
+                log.error("[异常]Caught an OSSException, which means your request made it to OSS, but was rejected with an error response for some reason.\n" +
+                                "Error Message: {}\n" +
+                                "Error Code: {}\n" +
+                                "Request ID: {}\n" +
+                                "Host ID: {}",
+                        ex.getErrorMessage(), ex.getErrorCode(), ex.getRequestId(), ex.getHostId());
+            }
+        } catch (ClientException ex) {
+            log.error("[异常]Caught an ClientException, which means the client encountered "
+                    + "a serious internal problem while trying to communicate with OSS, "
+                    + "such as not being able to access the network.\nError Message: {}", ex.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ossClient.shutdown();
+        }
+        return false;
+    }
+
     /**
      * 上传资源到 oss
      *

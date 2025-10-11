@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -158,6 +156,12 @@ public class ChatDataServiceImpl implements ChatDataService {
         String file = "wework/" + day + "/" + md5 + "." + media.getFileExt();
         String objectName = "wework/" + day + "/" + md5 + "." + media.getFileExt();
         try {
+            // 当有超级多文件待下载时，且文件较大，带宽会拉满，先判断oss是否存在同名文件
+            Boolean found = ossService.doesObjectExist(objectName);
+            if (found) {
+                log.info("媒体文件跳过: {}, {}, {}", media.getFileSize(), objectName, sdkFileId);
+                return;
+            }
             // 下载
             clientService.downloadMediaFile(sdkFileId, file, media.getFileSize());
             // 上传
