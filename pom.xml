@@ -6,7 +6,7 @@
     <artifactId>WeworkChatSDK</artifactId>
     <name>WeworkChatSDK</name>
     <description>企业微信会话存档服务(WeworkChatSDK)，提供一键接入java sdk，导出数据到阿里云msn、oss</description>
-    <version>1.4.1</version>
+    <version>1.5.1</version>
 
     <licenses>
         <license>
@@ -54,12 +54,12 @@
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.18.1</version>
+            <version>3.18.5</version>
         </dependency>
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-spring-boot-starter</artifactId>
-            <version>6.34.0</version>
+            <version>7.22.6</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -83,7 +83,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.7.1</version>
+                <version>3.8.0</version>
                 <executions>
                     <execution>
                         <id>bundle</id>
