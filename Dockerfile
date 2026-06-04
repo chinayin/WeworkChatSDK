@@ -23,7 +23,7 @@ RUN set -eux \
   && echo $SDK_VERSION \
   && cp -f target/WeworkChatSDK-${SDK_VERSION}-bundle.tar.gz target/bundle.tar.gz
 
-FROM --platform=linux/amd64 chinayin/openjdk:8-jre
+FROM --platform=linux/amd64 chinayin/openjdk:8u492-jre
 ENV TZ=PRC
 ENV PARAMS=""
 
